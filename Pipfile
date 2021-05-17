@@ -4,16 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pandas = "==1.2.0"
+pandas = "*"
 requests = "*"
 datetime = "*"
 numpy = "*"
-joblib = "*"
-keras = "*"
-tensorflow = "*"
+joblib = "0.14.1"
+scikit-learn = "==0.22.2"
+keras = "==2.3.1"
+tensorflow = "==2.2.0"
 
 [dev-packages]
 pytest = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.6"
