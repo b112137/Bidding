@@ -2,6 +2,7 @@ import joblib
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+import keras
 
 #You should not modify this part.
 def config():
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     
     consumption_input = pd.read_csv(args.consumption)
     scaler = joblib.load("scaler_consumption.save")
-    model = joblib.load("model_consumption.save")
+    model = keras.models.load_model('model_consumption.h5')
     data_input = consumption_input['consumption']
     test_X = data_input.values
     
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     
     generation_input = pd.read_csv(args.generation)
     scaler = joblib.load("scaler_generation.save")
-    model = joblib.load("model_generation.save")
+    model = keras.models.load_model('model_generation.h5')
     data_input = generation_input['generation']
     test_X = data_input.values
     
@@ -75,7 +76,6 @@ if __name__ == "__main__":
     
     for i in range(24):
         overflow = generation_prediction[0][i] - consumption_prediction[0][i]
-        print(overflow)
         if overflow > 0:
             data.append([str(prediction_data_temp), "sell", 2.49, str(overflow)])
         elif overflow < 0:
